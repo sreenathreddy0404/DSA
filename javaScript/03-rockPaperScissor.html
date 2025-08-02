@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock paper scissor</title>
+    <style>
+        .css-image{
+            height: 50px;
+            width: 50px;
+        }
+        .css-button{
+            height: 100px;
+            width: 100px;
+            padding: 10px;
+            margin-left: 20px;
+            background-color: transparent;
+            border :3px solid white;
+            border-radius: 50%;
+            border-color: white;
+        }
+        body{
+            background-color: rgb(25,25,25);
+            color: white;
+            font-family: cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .reset-button{
+            margin-top: 20px;
+            background-color: transparent;
+            padding: 15px;
+            border: 3px solid white;
+            border-radius: 30px;
+            font-size: 15px;
+            color: white;
+        }
+        p{
+            margin-top: 30px;
+        }
+        h1{
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose the move</h1>
+    <div>
+        <button onclick="playGame('Rock')" class="css-button"><img src="./Rock.png" alt="Rock" class="css-image"></button>
+        <button onclick="playGame('Paper')" class="css-button"><img src="./Paper.png" alt="paper" class="css-image"></button>
+        <button onclick="playGame('Scissors')" class="css-button"><img src="./Scissors.png" alt="scissor" class="css-image"></button>
+    </div>
+    <p id = "display"></p>
+    <p>Wins = <span id = "win"></span>,
+    Losses = <span id = "loss"></span>,
+    Ties = <span id = "tie"></span></p>
+    <button onclick="resetScore()" class="reset-button">Reset Score</button>
+    <button onclick="autoplay()" class="reset-button">Auto play</button>
+    <script>
+        
+        let score = JSON.parse(localStorage.getItem('score'));
+            if (!score) {
+                score = {
+                    win: 0,
+                    loss: 0,
+                    tie: 0
+                }
+            }
+        displayScore();
+
+        function setautoplay(){
+            const playerMove = pickComputerMove();
+            playGame(PlayerMove);
+        }
+
+        function autoplay(){
+            setInterval(setautoplay(),1000);
+        }
+        
+        function pickComputerMove() {
+            const moves = ['Rock', 'Paper', 'Scissors'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return moves[randomIndex];
+        }
+
+        function playGame(PlayerMove) {
+            const computerMove = pickComputerMove();
+            let result = '';
+            if (PlayerMove === 'Rock') {
+                if (computerMove === 'Paper') {
+                   result = 'You Loss';
+                } else if (computerMove === 'Rock') {
+                   result = 'Tie';
+                } else {
+                    result = 'You Win';
+                }
+            }
+            else if (PlayerMove === 'Paper') {
+                if (computerMove === 'Paper') {
+                    result = 'Tie';
+                } else if (computerMove === 'Rock') {
+                    result = 'You Win';
+                } else {
+                    result = 'You Loss';
+                }
+            }
+            else {
+                if (computerMove === 'Paper') {
+                    result = 'You Win';
+                } else if (computerMove === 'Rock') {
+                    result = 'You Loss';
+                } else {
+                    result = 'Tie';
+                }
+            }
+             if (result === 'You Win') {
+                score.win++;
+            } else if (result === 'You Loss') {
+                score.loss++;
+            } else{
+                score.tie++;
+            }
+            document.getElementById('display').innerHTML = `You Picked<img src="./${PlayerMove}.png" alt="Rock" class="css-image">
+    , Computer Picked <img src="./${computerMove}.png" alt="Rock" class="css-image">. ${result}`;
+            localStorage.setItem('score', JSON.stringify(score));
+            displayScore(result);
+            // console.log(score);
+            // alert(`You Picked ${PlayerMove}, Computer Picked ${computerMove}. ${result}`);
+        }
+
+        function displayScore(){
+            
+            document.getElementById('win').innerHTML = score.win;
+            document.getElementById('loss').innerHTML = score.loss;
+            document.getElementById('tie').innerHTML = score.tie;
+        }
+        localStorage.removeItem("scoreStorage");
+        function resetScore(){
+            document.getElementById('display').innerHTML ="";
+            score.win = 0;
+            score.loss = 0;
+            score.tie = 0;
+            localStorage.removeItem('score');
+            displayScore();
+            
+        }
+    </script>
+</body>
+</html>

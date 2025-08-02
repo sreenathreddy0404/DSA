@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe</title>
+    <style>
+        .js-subscribe-btn{
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .js-input{
+            padding: 10px;
+            font-weight: bold;
+            border: 2px solid orange;
+            border-radius: 10px;
+
+        }
+        .js-calculate{
+            padding: 10px;
+            font-weight: bold;
+            background-color: orange;
+            border-radius: 10px;
+            border: none;
+            color: white;
+        }
+        body{
+            font-family:cursive;
+        }
+        .c-btn{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            color: white;
+            background-color: rgb(4, 255, 0);
+            border: none;
+            box-shadow: 2px 1px 2px rgba(122, 122, 122, 0.578);
+        }
+        .js-cal-input{
+            padding: 10px;
+            font-weight: bold;
+            border: 2px solid rgb(55, 255, 0);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            width: 200px;
+        }
+        .headTails{
+            margin-top: 20px;
+        }
+        .main-heading{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .SmallCalculator{
+            margin-top: 10px;
+        }
+        .s-btn{
+            background-color: rgb(255, 136, 0);
+            border-radius: 20px;
+        }
+        .e-btn{
+            height: 40px;
+            width: 90px;
+            border-radius: 20px;
+            color: white;
+            background-color: rgb(255, 136, 0);
+            border: none;
+            box-shadow: 2px 1px 2px rgba(122, 122, 122, 0.578);
+        }
+        .CalculatorProject{
+            border: 2px solid orange;
+            padding: 20px;
+            border-radius: 10px;
+            width: 230px;
+        }
+    </style>
+</head>
+<body>
+    <div name = "subscribe button">
+        <p class="main-heading">Youtube Subscribe button</p>
+        <button class="js-subscribe-btn" onclick="subcribe()">Subscribe</button>
+    </div><br><br><br>
+   
+    <div name = "Amazon Shipping Calaculator">
+        <p class="main-heading">Amazon Shipping Calculator</p>
+        <p>Orders under $40 = +$10 shipping</p>
+        <p>Orders over $40 = FREE shipping</p>
+        <input type="text" class="js-input" placeholder="Cost of order" onkeydown="handleCostKeyDown(event)">
+        <button class="js-calculate" onclick="calculate()">calculate</button>
+        <p class="shipping-result"></p>
+    </div><br><br><br>
+
+    <div class = 'CalculatorProject'>
+        <p class="main-heading">Basic Calculator</p>
+        <input type="text" placeholder="0" class="js-cal-input"><br>
+        <div class = 'SmallCalculator'>
+            <button onclick='calculator(1)' class="c-btn">1</button>
+            <button onclick='calculator(2)' class="c-btn">2</button>
+            <button onclick='calculator(3)' class="c-btn">3</button>
+            <button onclick="calculator('DEL')" class="c-btn s-btn">DEL</button>
+            <button onclick="calculator('AC')" class="c-btn s-btn">AC</button>
+            
+        </div>
+        <div class = 'SmallCalculator'>
+            <button onclick='calculator(4)' class="c-btn">4</button>
+            <button onclick='calculator(5)' class="c-btn">5</button>
+            <button onclick='calculator(6)' class="c-btn">6</button>
+            <button onclick="calculator('*')" class="c-btn s-btn">*</button>
+            <button onclick="calculator('/')" class="c-btn s-btn">/</button>
+        </div>
+        
+        <div class = 'SmallCalculator'>
+            <button onclick='calculator(7)' class="c-btn">7</button>
+            <button onclick='calculator(8)' class="c-btn">8</button>
+            <button onclick='calculator(9)' class="c-btn">9</button>
+            <button onclick="calculator('+')" class="c-btn s-btn">+</button>
+            <button onclick="calculator('-')" class="c-btn s-btn">-</button>
+        </div>
+        <div class = 'SmallCalculator'> 
+            <button onclick='calculator("00")' class="c-btn">00</button>
+            <button onclick='calculator(0)' class="c-btn">0</button>
+            <button onclick='calculator(".")' class="c-btn">.</button>
+            <button onclick="calculator('=')" class="e-btn">=</button>
+        </div>
+    </div><br><br><br>
+    
+    <div class = "headTails">
+        <p class="main-heading">Head and Tails Game</p>
+        <button onclick = 'headtails("heads")' class="js-calculate">heads</button>
+        <button onclick = 'headtails("tails")' class="js-calculate">tails</button>
+        <p class = "display-head-tails"></p>
+    </div><br><br><br>
+
+    <div class="onkeyup printvalue">
+        <p class="main-heading">Print Value</p>
+        <input type="text" onkeyup="printvalue(event)" class="js-input js-printvalue">
+        <p class="printvalue"></p>
+    </div>
+    
+    
+    <script>
+        function calculator(val){
+            let inputvalue = document.querySelector('.js-cal-input');
+            if (val == '=') {
+                try{
+                    inputvalue.value = eval(inputvalue.value);
+                }catch(error){
+                    inputvalue.value = "ERROR";
+                }
+                return;
+            }
+            if(val == 'AC'){
+                inputvalue.value = 0;
+                return;
+            }
+            if(val == 'DEL'){
+                inputvalue.value = inputvalue.value.slice(0,-1);
+                return;
+            }
+            inputvalue.value += val;
+        }
+        function subcribe(){
+            let buttonElement = document.querySelector('.js-subscribe-btn');
+            if (buttonElement.innerHTML === 'Subscribe') {
+                buttonElement.innerHTML = 'Subscribed';
+            } else {
+                buttonElement.innerHTML = 'Subscribe';
+            }
+        }
+        function calculate(){
+            let number = Number(document.querySelector('.js-input').value);
+            let cost = number;
+            if(number>40){
+                cost = cost+10;
+            }
+            document.querySelector('.shipping-result').innerHTML = `${cost}`;
+        }
+        function handleCostKeyDown(event){
+            if(event.key === 'Enter'){
+                calculate();
+            }
+        }
+        function headtails(selectButton){
+            document.querySelector(".display-head-tails").innerHTML = `You chose: ${selectButton}`;
+        }        
+        function printvalue(event){
+            let val = "";
+            val = document.querySelector('.js-printvalue').value;
+            document.querySelector('.printvalue').innerHTML = val;
+        }
+    </script>
+</body>
+</html>

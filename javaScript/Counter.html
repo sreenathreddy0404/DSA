@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./commonstyles.css">
+</head>
+<body>
+    <p class="js-content"></p>
+    <button onclick = "Increment()" class="btn">increment</button>
+    <button onclick = "Decrement()" class="btn">decrement</button>
+    <button onclick = "Reset()" class="btn">Reset</button>
+    <script>
+        let counter = 0;
+        display();
+        function display(){
+            document.querySelector(".js-content").innerHTML = counter;
+        }
+        function Increment(){
+            counter++;
+             display();
+        }
+        function Decrement() {
+            counter--;
+            display();
+        }
+        function Reset() {
+            counter = 0;
+            display();
+        }
+    </script>
+</body>
+</html>
