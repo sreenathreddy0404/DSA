@@ -9,7 +9,7 @@ typedef pair<int, int> pii;
 
 // Dijkstra's Algorithm
 void dijkstra(int V, vector<pii> adj[], int src) {
-    vector<int> dist(V, 1e9); // distance array
+    vector<int> dist(V, 1e9);
     priority_queue<pii, vector<pii>, greater<pii>> pq; // min-heap
 
     dist[src] = 0;
@@ -43,7 +43,7 @@ int main() {
     cout << "Enter number of vertices and edges: ";
     cin >> V >> E;
 
-    vector<pii> adj[V]; // adjacency list
+    vector<pii> adj[V];
 
     cout << "Enter edges in format: u v weight\n";
     for (int i = 0; i < E; i++) {
