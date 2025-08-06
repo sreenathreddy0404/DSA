@@ -7,11 +7,9 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-// Dijkstra's Algorithm
 void dijkstra(int V, vector<pii> adj[], int src) {
     vector<int> dist(V, 1e9);
-    priority_queue<pii, vector<pii>, greater<pii>> pq; // min-heap
-
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
     dist[src] = 0;
     pq.push({0, src});
 
